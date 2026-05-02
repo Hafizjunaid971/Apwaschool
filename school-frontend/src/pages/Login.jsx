@@ -29,7 +29,7 @@ export default function Login({ setAuthorizedUser }) {
     e.preventDefault();
     setIsLoading(true);
     // const url = isLogin ? 'http://localhost:5000/api/auth/login' : 'http://localhost:5000/api/auth/signup';
-    const url = isLogin ? `${API_BASE_URL}/api/auth/login` : `${API_BASE_URL}/api/auth/signup`;
+    const url = isLogin ? `${API_BASE_URL}/auth/login` : `${API_BASE_URL}/auth/signup`;
 
     try {
       const res = await axios.post(url, form);

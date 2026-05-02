@@ -19,7 +19,7 @@ export default function StaffManagement() {
   const fileInputRef = useRef(null);
 
   const fetchStaff = async () => {
-  const res = await axios.get(`${API_BASE_URL}/api/staff`);
+  const res = await axios.get(`${API_BASE_URL}/staff`);
     setStaff(res.data.data);
   };
 
@@ -44,11 +44,11 @@ export default function StaffManagement() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editMode) {
-    await axios.put(`${API_BASE_URL}/api/staff/${editId}`, form);
+    await axios.put(`${API_BASE_URL}/staff/${editId}`, form);
       alert("Staff Updated!");
     } else {
       // await axios.post('http://localhost:5000/api/staff', form);
-      await axios.post(`${API_BASE_URL}/api/staff`, form);
+      await axios.post(`${API_BASE_URL}/staff`, form);
       alert("Staff Added!");
     }
     resetForm();
@@ -71,7 +71,7 @@ export default function StaffManagement() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this record?")) {
       // await axios.delete(`http://localhost:5000/api/staff/${id}`);
-      await axios.delete(`${API_BASE_URL}/api/staff/${id}`);
+      await axios.delete(`${API_BASE_URL}/staff/${id}`);
       alert("Deleted!");
       fetchStaff();
     }
@@ -98,7 +98,7 @@ export default function StaffManagement() {
         const data = XLSX.utils.sheet_to_json(ws, { range: 2 }); 
         if (data.length === 0) return alert("No data found!");
         // const res = await axios.post('http://localhost:5000/api/staff/import', data);
-        await axios.post(`${API_BASE_URL}/api/staff/import`, data);
+        await axios.post(`${API_BASE_URL}/staff/import`, data);
         alert(res.data.message);
         fetchStaff();
       } catch (error) {

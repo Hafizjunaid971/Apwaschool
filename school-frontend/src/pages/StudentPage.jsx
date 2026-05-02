@@ -22,7 +22,7 @@ export default function StudentPage() {
 
   const fetchStudents = async () => {
     // const res = await axios.get(`http://localhost:5000/api/students?className=${className}`);
-    const res = await axios.get(`${API_BASE_URL}/api/students?className=${className}`);
+    const res = await axios.get(`${API_BASE_URL}/students?className=${className}`);
 
     setStudents(res.data.data);
   };
@@ -41,12 +41,12 @@ export default function StudentPage() {
     e.preventDefault();
     if (editMode) {
       // await axios.put(`http://localhost:5000/api/students/${editId}`, form);
-      await axios.put(`${API_BASE_URL}/api/students/${editId}`, form);
+      await axios.put(`${API_BASE_URL}/students/${editId}`, form);
 
       alert("Student Updated!");
     } else {
       // await axios.post('http://localhost:5000/api/students', { ...form, className });
-    await axios.post(`${API_BASE_URL}/api/students`, { ...form, className });
+    await axios.post(`${API_BASE_URL}/students`, { ...form, className });
       alert("Student Added!");
     }
     resetForm(); fetchStudents();
@@ -65,7 +65,7 @@ export default function StudentPage() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this student record?")) {
-      await axios.delete(`${API_BASE_URL}/api/students/${id}`);
+      await axios.delete(`${API_BASE_URL}/students/${id}`);
      fetchStudents();
     }
   };
@@ -159,7 +159,7 @@ const handleImport = (e) => {
         
         // Backend ko bhej diya
         // const res = await axios.post('http://localhost:5000/api/students/import', jsonData);
-        await axios.post(`${API_BASE_URL}/api/students/import`, jsonData);
+        await axios.post(`${API_BASE_URL}/students/import`, jsonData);
         alert(res.data.message); 
         fetchStudents();
       } catch (error) {
