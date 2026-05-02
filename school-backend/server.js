@@ -9,7 +9,12 @@ const studentRoutes = require('./routes/studentRoutes'); // <--- YE LINE ADD KAR
 const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
-
+// ✅ YAHAN SIRF CORS UPDATE KIYA HAI (PEHLE SIRF app.use(cors()) THA)
+app.use(cors({
+    origin: ["http://localhost:3000", "https://apwaschool-wzbh.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 const app = express();
 app.use(cors());
 app.use(express.json());

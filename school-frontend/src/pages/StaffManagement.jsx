@@ -1,138 +1,3 @@
-// import { useState, useEffect, useRef } from 'react';
-// import { FiPlus, FiDownload, FiUpload } from 'react-icons/fi';
-// import axios from 'axios';
-// import * as XLSX from 'xlsx';
-// // range: 2 ka matlab hai pehli 2 rows (title wali) skip karo, 3rd row ko header samjho
-
-// export default function StaffManagement() {
-//   const [staff, setStaff] = useState([]);
-//   const [form, setForm] = useState({ name: '', designation: '', personalIdNo: '', contactNo: '', schoolPlaceOfPosting: '' });
-//   const fileInputRef = useRef(null);
-
-//   const fetchStaff = async () => {
-//     const res = await axios.get('http://localhost:5000/api/staff');
-//     setStaff(res.data.data);
-//   };
-
-//   useEffect(() => { fetchStaff(); }, []);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     await axios.post('http://localhost:5000/api/staff', form);
-//     alert("Staff Added!");
-//     setForm({ name: '', designation: '', personalIdNo: '', contactNo: '', schoolPlaceOfPosting: '' });
-//     fetchStaff();
-//   };
-
-//   // EXPORT TO EXCEL
-//   const exportToExcel = () => {
-//     const worksheet = XLSX.utils.json_to_sheet(staff);
-//     const workbook = XLSX.utils.book_new();
-//     XLSX.utils.book_append_sheet(workbook, worksheet, "Staff");
-//     XLSX.writeFile(workbook, "Staff_Data.xlsx");
-//   };
-
-//   // IMPORT FROM EXCEL
-//   const handleImport = (e) => {
-//     const file = e.target.files[0];
-//     if (!file) return;
-
-//     const reader = new FileReader();
-//     reader.onload = async (evt) => {
-//       const bstr = evt.target.result;
-//       const wb = XLSX.read(bstr, { type: "binary" });
-//       const wsname = wb.SheetNames[0];
-//       const ws = wb.Sheets[wsname];
-      
-//       // Excel ko JSON mein convert karega (Extra columns automatically ignore hongi DB mein ja kar)
-//       const data = XLSX.utils.sheet_to_json(ws); 
-      
-//       try {
-//         // Backend ko bhej rahe hain array ke taur par
-//         const res = await axios.post('http://localhost:5000/api/staff/import', data);
-//         alert(res.data.message);
-//         fetchStaff(); // Table update karega
-//       } catch (error) {
-//         alert("Import Error: " + error.response?.data?.message);
-//       }
-//     };
-//     reader.readAsBinaryString(file);
-//     e.target.value = ""; // Agar same file dubara upload karo toh chale
-//   };
-
-//   return (
-//     <div className="p-4 md:p-6 space-y-6">
-//       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-//         <h1 className="text-2xl font-bold text-gray-800">Staff Records</h1>
-//         <div className="flex gap-3">
-//           <button onClick={() => fileInputRef.current.click()} className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md">
-//             <FiUpload /> Import Excel
-//           </button>
-//           <button onClick={exportToExcel} className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl font-semibold shadow-md">
-//             <FiDownload /> Export Excel
-//           </button>
-//           {/* Hidden File Input */}
-//           <input type="file" accept=".xlsx, .xls" ref={fileInputRef} onChange={handleImport} className="hidden" />
-//         </div>
-//       </div>
-
-//       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow-sm border grid grid-cols-1 md:grid-cols-3 gap-4">
-//         <input type="text" placeholder="Full Name" required value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} className="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none" />
-//         <input type="text" placeholder="Designation" required value={form.designation} onChange={(e) => setForm({...form, designation: e.target.value})} className="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none" />
-//         <input type="text" placeholder="CNIC / ID No" required value={form.personalIdNo} onChange={(e) => setForm({...form, personalIdNo: e.target.value})} className="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none" />
-//         <input type="text" placeholder="Contact No" value={form.contactNo} onChange={(e) => setForm({...form, contactNo: e.target.value})} className="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none" />
-//         <input type="text" placeholder="School / Place" value={form.schoolPlaceOfPosting} onChange={(e) => setForm({...form, schoolPlaceOfPosting: e.target.value})} className="border rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-blue-500 outline-none" />
-//         <button type="submit" className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-2.5 font-semibold">
-//           <FiPlus size={20} /> Add Staff
-//         </button>
-//       </form>
-//       {/* Staff Table - UI Fix */}
-//       <div className="bg-white rounded-xl shadow-sm border overflow-x-auto">
-//         {/* min-w-[1200px] se table stretch nahi hoga, scroll karne par saath rahega */}
-//         <table className="w-full min-w-[1200px] text-left text-sm text-gray-600">
-//           <thead className="bg-gray-50 text-gray-700 uppercase text-xs tracking-wider">
-//             <tr>
-//               <th className="px-4 py-3">Name</th>
-//               <th className="px-4 py-3">Designation</th>
-//               <th className="px-4 py-3">School / Place</th>
-//               <th className="px-4 py-3">DDO / SEMIS</th>
-//               <th className="px-4 py-3">Personal ID</th>
-//               <th className="px-4 py-3">Contact</th>
-//               <th className="px-4 py-3">Email</th>
-//               <th className="px-4 py-3">Bank Acc</th>
-//               <th className="px-4 py-3">Talwka</th>
-//               <th className="px-4 py-3">District</th>
-//             </tr>
-//           </thead>
-//           <tbody className="divide-y divide-gray-100">
-//             {staff.length === 0 ? (
-//               <tr><td colSpan="10" className="text-center py-10 text-gray-400">No Data Found</td></tr>
-//             ) : (
-//               staff.map((s) => (
-//                 <tr key={s._id} className="hover:bg-gray-50">
-//                   <td className="px-4 py-3 font-medium text-gray-800 whitespace-nowrap">{s.name}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.designation}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.schoolPlaceOfPosting}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.ddoCode}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.personalIdNo}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.contactNo}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.emailAddress}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.bankAccountNo}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.talwka}</td>
-//                   <td className="px-4 py-3 whitespace-nowrap">{s.district}</td>
-//                 </tr>
-//               ))
-//             )}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
 import { useState, useEffect, useRef } from 'react';
 import { FiPlus, FiDownload, FiUpload, FiSearch, FiEdit2, FiTrash2 } from 'react-icons/fi';
 import axios from 'axios';
@@ -154,7 +19,7 @@ export default function StaffManagement() {
   const fileInputRef = useRef(null);
 
   const fetchStaff = async () => {
-    const res = await axios.get('http://localhost:5000/api/staff');
+  const res = await axios.get(`${API_BASE_URL}/api/staff`);
     setStaff(res.data.data);
   };
 
@@ -179,10 +44,11 @@ export default function StaffManagement() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editMode) {
-      await axios.put(`http://localhost:5000/api/staff/${editId}`, form);
+    await axios.put(`${API_BASE_URL}/api/staff/${editId}`, form);
       alert("Staff Updated!");
     } else {
-      await axios.post('http://localhost:5000/api/staff', form);
+      // await axios.post('http://localhost:5000/api/staff', form);
+      await axios.post(`${API_BASE_URL}/api/staff`, form);
       alert("Staff Added!");
     }
     resetForm();
@@ -204,7 +70,8 @@ export default function StaffManagement() {
   // DELETE BUTTON CLICK
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this record?")) {
-      await axios.delete(`http://localhost:5000/api/staff/${id}`);
+      // await axios.delete(`http://localhost:5000/api/staff/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/staff/${id}`);
       alert("Deleted!");
       fetchStaff();
     }
@@ -230,7 +97,8 @@ export default function StaffManagement() {
         const ws = wb.Sheets[wb.SheetNames[0]];
         const data = XLSX.utils.sheet_to_json(ws, { range: 2 }); 
         if (data.length === 0) return alert("No data found!");
-        const res = await axios.post('http://localhost:5000/api/staff/import', data);
+        // const res = await axios.post('http://localhost:5000/api/staff/import', data);
+        await axios.post(`${API_BASE_URL}/api/staff/import`, data);
         alert(res.data.message);
         fetchStaff();
       } catch (error) {

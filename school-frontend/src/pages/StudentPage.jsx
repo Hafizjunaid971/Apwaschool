@@ -21,7 +21,9 @@ export default function StudentPage() {
   const [form, setForm] = useState(emptyForm);
 
   const fetchStudents = async () => {
-    const res = await axios.get(`http://localhost:5000/api/students?className=${className}`);
+    // const res = await axios.get(`http://localhost:5000/api/students?className=${className}`);
+    const res = await axios.get(`${API_BASE_URL}/api/students?className=${className}`);
+
     setStudents(res.data.data);
   };
 
@@ -38,10 +40,13 @@ export default function StudentPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editMode) {
-      await axios.put(`http://localhost:5000/api/students/${editId}`, form);
+      // await axios.put(`http://localhost:5000/api/students/${editId}`, form);
+      await axios.put(`${API_BASE_URL}/api/students/${editId}`, form);
+
       alert("Student Updated!");
     } else {
-      await axios.post('http://localhost:5000/api/students', { ...form, className });
+      // await axios.post('http://localhost:5000/api/students', { ...form, className });
+    await axios.post(`${API_BASE_URL}/api/students`, { ...form, className });
       alert("Student Added!");
     }
     resetForm(); fetchStudents();
@@ -60,7 +65,8 @@ export default function StudentPage() {
 
   const handleDelete = async (id) => {
     if (window.confirm("Delete this student record?")) {
-      await axios.delete(`http://localhost:5000/api/students/${id}`); fetchStudents();
+      await axios.delete(`${API_BASE_URL}/api/students/${id}`);
+     fetchStudents();
     }
   };
 
@@ -71,78 +77,6 @@ export default function StudentPage() {
     XLSX.writeFile(workbook, `${className}_Students.xlsx`);
   };
 
-  //  const handleImport = (e) => {
-  //   const file = e.target.files[0]; if (!file) return;
-  //   const reader = new FileReader();
-  //   reader.onload = async (evt) => {
-  //     try {
-  //       const bstr = evt.target.result;
-  //       const wb = XLSX.read(bstr, { type: "binary" });
-  //       const ws = wb.Sheets[wb.SheetNames[0]];
-        
-  //       // raw: false dates ko string mein convert karega
-  //       const rawData = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, dateNF: 'dd-mm-yyyy' });
-        
-  //       let headerIndex = -1;
-  //       for (let i = 0; i < rawData.length; i++) {
-  //         if (rawData[i] && rawData[i].includes("GR#")) { headerIndex = i; break; }
-  //       }
-  //       if (headerIndex === -1) return alert("Excel mein 'GR#' column nahi mila.");
-
-  //       const headers = rawData[headerIndex];
-        
-  //       // TOOTE HUE HEADERS KO DHOONDHNE KA LOGIC
-  //       const dobIdx = headers.findIndex(h => String(h).includes("Date of Birth"));
-  //       const doaIdx = headers.findIndex(h => String(h).includes("Date of Admission"));
-  //       const relIdx = headers.findIndex(h => String(h).trim() === "Relation"); // "Relation with" alag hai isliye sirf "Relation" dhundha
-
-  //       const dataRows = rawData.slice(headerIndex + 1).filter(row => row.length > 0 && row.some(cell => cell != null && String(cell).trim() !== ""));
-
-  //       const jsonData = dataRows.map(row => {
-  //         let obj = {};
-  //         headers.forEach((header, index) => { 
-  //           if (header && String(header).trim() !== "") {
-  //             obj[String(header).trim()] = row[index] !== undefined ? row[index] : ""; 
-  //           }
-  //         });
-
-  //         // 1. DOB KO JORNA (DD-MM-YY)
-  //         if (dobIdx !== -1) {
-  //            const dd = row[dobIdx] || "";
-  //            const mm = row[dobIdx + 1] || "";
-  //            const yy = row[dobIdx + 2] || "";
-  //            obj["Date of Birth (DD/MM/YY)"] = `${dd}-${mm}-${yy}`;
-  //         }
-
-  //         // 2. DOA KO JORNA (DD-MM-YY)
-  //         if (doaIdx !== -1) {
-  //            const dd = row[doaIdx] || "";
-  //            const mm = row[doaIdx + 1] || "";
-  //            const yy = row[doaIdx + 2] || "";
-  //            obj["Date of Admission (DD/MM/YY)"] = `${dd}-${mm}-${yy}`;
-  //         }
-
-  //         // 3. RELATION WITH KO JORNA
-  //         if (relIdx !== -1) {
-  //            obj["Relation with"] = row[relIdx + 1] !== undefined ? row[relIdx + 1] : "";
-  //         }
-          
-  //         return obj;
-  //       });
-
-  //       if (jsonData.length === 0) return alert("No data found!");
-        
-  //       // Backend ko bhej diya
-  //       const res = await axios.post('http://localhost:5000/api/students/import', jsonData);
-  //       alert(res.data.message); 
-  //       fetchStudents();
-  //     } catch (error) {
-  //       alert("Import Error: " + (error.response?.data?.message || error.message));
-  //     }
-  //   };
-  //   reader.readAsBinaryString(file); 
-  //   e.target.value = ""; 
-  // };
 
 const handleImport = (e) => {
     const file = e.target.files[0]; if (!file) return;
@@ -224,7 +158,8 @@ const handleImport = (e) => {
         if (jsonData.length === 0) return alert("No data found!");
         
         // Backend ko bhej diya
-        const res = await axios.post('http://localhost:5000/api/students/import', jsonData);
+        // const res = await axios.post('http://localhost:5000/api/students/import', jsonData);
+        await axios.post(`${API_BASE_URL}/api/students/import`, jsonData);
         alert(res.data.message); 
         fetchStudents();
       } catch (error) {
