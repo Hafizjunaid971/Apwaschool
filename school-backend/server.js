@@ -11,7 +11,7 @@ const authRoutes = require('./routes/authRoutes');
 dotenv.config();
 // ✅ YAHAN SIRF CORS UPDATE KIYA HAI (PEHLE SIRF app.use(cors()) THA)
 app.use(cors({
-    origin: ["http://localhost:3000", "https://apwaschool-wzbh.vercel.app"],
+    origin: ["http://localhost:3000", "https://apwaschool-wzbh.vercel.app/api/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
