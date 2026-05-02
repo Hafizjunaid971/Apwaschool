@@ -37,11 +37,12 @@ export default function Login({ setAuthorizedUser }) {
       localStorage.setItem('token', res.data.token);
       
       if (isLogin) {
-        // ✅ 2. CHECK KAR RAHE HAIN KE KYA YEH EMAIL LIST MEIN HAI?
+        // ✅ AGAR EMAIL LIST MEIN HAI TOH LOCALSTORAGE MEIN BHI SAVE KARO
         if (ADMIN_EMAILS.includes(form.email.toLowerCase().trim())) {
-          setAuthorizedUser(form.email); // Sidebar show hoga
+          localStorage.setItem('authorizedUser', form.email); // Yeh line add ki
+          setAuthorizedUser(form.email);
         }
-        navigate('/'); // Dashboard par jao
+        navigate('/');
       } else {
         setIsLogin(true);
         setForm({ email: '', password: '', phoneNumber: '' });
@@ -52,7 +53,6 @@ export default function Login({ setAuthorizedUser }) {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
       <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl p-8">

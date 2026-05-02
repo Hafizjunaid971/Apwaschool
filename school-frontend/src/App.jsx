@@ -57,16 +57,35 @@ function Sidebar({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) {
   );
 }
 
+// function App() {
+//   const [isOpen, setIsOpen] = useState(false); 
+//   const [isCollapsed, setIsCollapsed] = useState(false); 
+//   const [authorizedUser, setAuthorizedUser] = useState(null);
+
+//   const handleLogout = () => {
+//     setAuthorizedUser(null);
+//     localStorage.removeItem('token');
+//     setIsOpen(false);
+//   };
+
 function App() {
   const [isOpen, setIsOpen] = useState(false); 
   const [isCollapsed, setIsCollapsed] = useState(false); 
-  const [authorizedUser, setAuthorizedUser] = useState(null);
+  
+  // ✅ 1. REFRESH KE BAAD BHI USER RAHEGA (LocalStorage se check kar raha hai)
+  const [authorizedUser, setAuthorizedUser] = useState(() => {
+    const savedUser = localStorage.getItem('authorizedUser');
+    return savedUser ? savedUser : null;
+  });
 
   const handleLogout = () => {
     setAuthorizedUser(null);
     localStorage.removeItem('token');
+    localStorage.removeItem('authorizedUser'); // Yeh line add ki
     setIsOpen(false);
   };
+
+
 
   return (
     <Router>
@@ -87,9 +106,10 @@ function App() {
             {authorizedUser ? (
               <div className="flex items-center gap-4 text-sm font-medium">
                 <span className="hidden md:block text-blue-200 border border-blue-700 px-3 py-1 rounded-full">👤 {authorizedUser.split('@')[0]}</span>
-                <button onClick={handleLogout} className="bg-red-600 hover:bg-red-500 px-4 py-1.5 rounded-md transition flex items-center gap-2">
+                  <button onClick={handleLogout} className="bg-red-600 hover:bg-red-500 px-4 py-1.5 rounded-md transition flex items-center gap-2">
                   <FiLogOut size={16} /> <span className="hidden md:inline">Logout</span>
                 </button>
+
               </div>
             ) : (
               /* ✅ PUBLIC TOP NAV LINKS (LOGIN KE BINA BHI DIKHENGE) */
