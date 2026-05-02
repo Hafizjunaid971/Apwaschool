@@ -202,6 +202,7 @@ const handleImport = (e) => {
         <input type="text" name="guardianCnic" placeholder="Guardian CNIC" value={form.guardianCnic} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <input type="text" name="relationWith" placeholder="Relation with" value={form.relationWith} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <input type="text" name="contactNumber" placeholder="Contact Number" value={form.contactNumber} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+        <input type="text" name="contactNumber" placeholder="Contact Number" value={form.className} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <input type="text" name="disability" placeholder="Disability if Any" value={form.disability} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <select name="vaccinated" value={form.vaccinated} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none bg-white">
             <option value="">Vaccinated?</option><option>Yes</option><option>No</option>
@@ -234,6 +235,7 @@ const handleImport = (e) => {
               <th className="px-1 py-2">Guardian CNIC</th>
               <th className="px-1 py-2">Relation With Guardian</th>
               <th className="px-1 py-2">Contact</th>
+              <th className="px-1 py-2">Class</th>
               <th className="px-1 py-2">Disability</th>
               <th className="px-1 py-2">Vaccinated</th>
               <th className="px-1 py-2">Remarks</th>
@@ -257,6 +259,7 @@ const handleImport = (e) => {
                 <td className="px-1 py-1.5 whitespace-nowrap">{s.guardianCnic}</td>
                 <td className="px-1 py-1.5 whitespace-nowrap">{s.relationWith}</td>
                 <td className="px-1 py-1.5 whitespace-nowrap">{s.contactNumber}</td>
+                <td className="px-1 py-1.5 whitespace-nowrap">{s.className}</td>
                 <td className="px-1 py-1.5 whitespace-nowrap">{s.disability}</td>
                 <td className="px-1 py-1.5 whitespace-nowrap">{s.vaccinated}</td>
                 <td className="px-1 py-1.5 whitespace-nowrap">{s.remarks}</td>
