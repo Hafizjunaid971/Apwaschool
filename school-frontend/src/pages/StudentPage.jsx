@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { FiPlus, FiDownload, FiUpload, FiSearch, FiEdit2, FiTrash2 } from 'react-icons/fi';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
+import { API_BASE_URL } from '../../config'; // ya './config' agar same folder mein hai
 
 export default function StudentPage() {
   const { className } = useParams();
