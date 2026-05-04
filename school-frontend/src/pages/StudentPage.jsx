@@ -202,7 +202,7 @@ const handleImport = (e) => {
         <input type="text" name="guardianCnic" placeholder="Guardian CNIC" value={form.guardianCnic} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <input type="text" name="relationWith" placeholder="Relation with" value={form.relationWith} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <input type="text" name="contactNumber" placeholder="Contact Number" value={form.contactNumber} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
-        <input type="text" name="contactNumber" placeholder="Contact Number" value={form.className} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
+        <input type="text" name="contactNumber" placeholder="Class" value={form.className} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <input type="text" name="disability" placeholder="Disability if Any" value={form.disability} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none" />
         <select name="vaccinated" value={form.vaccinated} onChange={handleChange} className="border rounded-lg px-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none bg-white">
             <option value="">Vaccinated?</option><option>Yes</option><option>No</option>
