@@ -12,20 +12,20 @@ export default function OurTeam() {
         role: "HM & DDO KQ0903", 
         phone: "0312-9876543", 
         email: "fouziamalik@gmail.com", 
-        img: "https://placehold.co/300x300/ec4899/ffffff?text=Fouzia+Malik",
+        img: "/img/p1.jpg",
         bio: "Mrs. Fouzia Malik is the backbone of our academic planning. With over 15 years of experience in educational administration, she ensures that the curriculum is delivered effectively. She actively monitors student progress and works closely with teachers to maintain the highest standards of education in the school."
       },
       { 
         name: "Hafiz Junaid Ahmed", 
-        role: "Principal & IT Admin", 
+        role: "IT Admin & Mathematics Teacher", 
         phone: "0300-1234567", 
         email: "hafizjunaid971@gmail.com", 
-        img: "https://placehold.co/300x300/1e3a8a/ffffff?text=Hafiz+Junaid",
+        img: "/img/junaid.PNG",
         bio: "Hafiz Junaid Ahmed leads the school with a vision of integrating modern technology with traditional moral values. As the Principal and IT Admin, he has transformed the school's digital infrastructure, introducing modern management systems to keep everything transparent and efficient."
       },
       { 
         name: "Noman Khan", 
-        role: "Mathematics Teacher", 
+        role: "Science Teacher", 
         phone: "0333-1112233", 
         email: "nomankhan@gmail.com", 
         img: "https://placehold.co/300x300/22c55e/ffffff?text=Noman+Khan",
@@ -61,7 +61,7 @@ export default function OurTeam() {
         role: "Arts Teacher", 
         phone: "0334-5566778", 
         email: "neelamshokat@gmail.com", 
-        img: "https://placehold.co/300x300/8b5cf6/ffffff?text=Neelam+Shokat",
+        img: "/img/neelam.jpeg",
         bio: "Ms. Neelam Shokat nurtures the creative talents of our students. From drawing and painting to calligraphy and crafts, she provides a platform for students to express their imagination. Her artwork decorations during school events are always highly praised by parents."
       },
       { 
@@ -69,7 +69,7 @@ export default function OurTeam() {
         role: "Junior Section Head", 
         phone: "0302-9988776", 
         email: "farihanaqwi@gmail.com", 
-        img: "https://placehold.co/300x300/14b8a6/ffffff?text=Fariha+Naqwi",
+        img: "/img/fariha.jpeg",
         bio: "Ms. Fariha Naqwi is known for her immense patience and love for early childhood education. She oversees the KG and early primary classes, ensuring that the youngest students feel safe, loved, and excited to learn. She builds a strong foundation for their future academic journey."
       },
       { 
@@ -93,19 +93,32 @@ export default function OurTeam() {
         role: "Staff Cordinator", 
         phone: "0301-7788990", 
         email: "Ayoub@gmail.com", 
-        img: "https://placehold.co/300x300/f59e0b/ffffff?text=Idress+Dall",
+        img: "https://placehold.co/300x300/f59e0b/ffffff?text=Ayoub+khan",
         bio: "Mr. Ayoub brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
-      },
+      }
     ]);
   }, []);
 
   return (
     <div className="bg-gray-50 pb-16">
-      {/* Header Banner */}
-      <div className="bg-blue-900 text-white py-16 px-6 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Our Dedicated Team</h1>
-        <div className="w-24 h-1 bg-yellow-400 mx-auto rounded-full"></div>
-        <p className="mt-4 text-blue-200 max-w-2xl mx-auto">Meet the hardworking individuals who shape the future of our students every day.</p>
+      {/* ✅ overflow-hidden LAGAYA TAKI DOUBLE SCROLL KHATAM HO */}
+      <div className="relative w-full h-[500px] bg-blue-900 overflow-hidden">
+        
+        {/* ✅ object-cover USE KIYA TAKI WIDTH 100% RAHE */}
+        <img 
+          src="/img/staff1.jpg" 
+          alt="Team Banner" 
+          className="w-full h-full object-cover object-top"
+        />
+        
+        <div className="absolute inset-0 bg-blue-900/80 flex items-center justify-center py-16 px-6">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* <div className="w-24 h-1 bg-yellow-400 mx-auto rounded-full"></div> */}
+           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 drop-shadow-lg text-white">Our Dedicated Team</h1>
+
+            {/* <p className="mt-4 text-blue-100 text-lg max-w-2xl mx-auto">Meet the hardworking individuals who shape the future of our students every day.</p> */}
+          </div>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mt-12">
@@ -118,7 +131,7 @@ export default function OurTeam() {
                 <img 
                   src={member.img} 
                   alt={member.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                   <span className="bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">{member.role}</span>
