@@ -29,7 +29,7 @@ export default function OurTeam() {
         phone: "0333-1112233", 
         email: "nomankhan@gmail.com", 
         img: "https://placehold.co/300x300/22c55e/ffffff?text=Noman+Khan",
-        bio: "Mr. Noman Khan has a unique way of making mathematics fun and easy for students. He focuses on building strong logical foundations and problem-solving skills. His interactive teaching methods have significantly improved students' test scores and their interest in the subject."
+        bio: "My name is Noman Khan, and I am a dedicated primary school teacher currently serving at APWA 5-E New Karachi. With a deep passion for nurturing young minds, I specialize in teaching Science and Social Studies (SST). My goal is to transform the classroom into a space of discovery—whether we are exploring the biological wonders of the natural world or understanding the history and geography that shape our society. At APWA, I am committed to providing my students with a strong academic foundation"
       },
       { 
         name: "Salman Ahmed", 
@@ -39,13 +39,14 @@ export default function OurTeam() {
         img: "https://placehold.co/300x300/3b82f6/ffffff?text=Salman+Ahmed",
         bio: "Mr. Salman Ahmed specializes in English language and literature. He focuses on enhancing students' communication skills, grammar, and vocabulary. Through debates, speeches, and creative writing sessions, he prepares students to express themselves confidently in the real world."
       },
+      
       { 
-        name: "Imranshaikh", 
-        role: "Staff Cordinator", 
-        phone: "0301-7788990", 
-        email: "imranshaikh@gmail.com", 
-        img: "https://placehold.co/300x300/f59e0b/ffffff?text=Imrak+Shaikh",
-        bio: "Mr. Imran Shaikh brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
+        name: "Arif Azeem", 
+        role: "Junior Section Head", 
+        phone: "0302-9988776", 
+        email: "ARIFAZEEM@gmail.com", 
+        img: "https://placehold.co/300x300/14b8a6/ffffff?text=Arif+azeem",
+        bio: "MR, aRIF aZEEM is known for her immense patience and love for early childhood education. She oversees the KG and early primary classes, ensuring that the youngest students feel safe, loved, and excited to learn. She builds a strong foundation for their future academic journey."
       },
       { 
         name: "Zulfiqar Ali", 
@@ -53,7 +54,7 @@ export default function OurTeam() {
         phone: "0321-1122334", 
         email: "zulfiqarapwa@gmail.com", 
         img: "https://placehold.co/300x300/ef4444/ffffff?text=Zulfiqar+Ali",
-        bio: "Mr. Imran Shaikh brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
+        bio: "Mr. Syed Zulfiqar brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
       },
       { 
         name: "Neelam Shokat", 
@@ -70,7 +71,31 @@ export default function OurTeam() {
         email: "farihanaqwi@gmail.com", 
         img: "https://placehold.co/300x300/14b8a6/ffffff?text=Fariha+Naqwi",
         bio: "Ms. Fariha Naqwi is known for her immense patience and love for early childhood education. She oversees the KG and early primary classes, ensuring that the youngest students feel safe, loved, and excited to learn. She builds a strong foundation for their future academic journey."
-      }
+      },
+      { 
+        name: "Imranshaikh", 
+        role: "Staff Cordinator", 
+        phone: "0301-7788990", 
+        email: "imranshaikh@gmail.com", 
+        img: "https://placehold.co/300x300/f59e0b/ffffff?text=Imran+Shaikh",
+        bio: "Mr. Imran Shaikh brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
+      },
+      { 
+        name: "Idress", 
+        role: "Staff Cordinator", 
+        phone: "0301-7788990", 
+        email: "Idress@gmail.com", 
+        img: "https://placehold.co/300x300/f59e0b/ffffff?text=Idress+Dall",
+        bio: "Mr. idress brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
+      },
+      { 
+        name: "Ayoub", 
+        role: "Staff Cordinator", 
+        phone: "0301-7788990", 
+        email: "Ayoub@gmail.com", 
+        img: "https://placehold.co/300x300/f59e0b/ffffff?text=Idress+Dall",
+        bio: "Mr. Ayoub brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
+      },
     ]);
   }, []);
 
