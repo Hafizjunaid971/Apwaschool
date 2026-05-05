@@ -89,7 +89,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100 font-sans flex flex-col">
+      <div className="min-h-screen bg-gray-100 font-sans flex flex-col overflow-x-hidden">
         
         {/* STICKY BLUE TOP NAVBAR */}
         <div className="fixed top-0 left-0 w-full h-16 bg-blue-900 text-white z-50 shadow-lg flex justify-between items-center px-4 md:px-6">
