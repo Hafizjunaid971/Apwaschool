@@ -1,13 +1,43 @@
 import React, { useState } from 'react';
-import { FiPhone, FiMail, FiMapPin, FiClock } from 'react-icons/fi';
+import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiCheck } from 'react-icons/fi';
+import axios from 'axios';
+import { API_BASE_URL } from '../../config'; // ya './config' agar same folder mein hai
 
 export default function ContactUs() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', message: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Message sent successfully!");
-    setFormData({ name: '', email: '', message: '' });
+    setIsLoading(true);
+    setIsSuccess(false);
+
+    try {
+      const res = await axios.post(`${API_BASE_URL}/contact`, form);
+      if (res.data.success) {
+        setIsSuccess(true);
+        setForm({ name: '', phone: '', message: '' }); // Form clear kar do
+        setTimeout(() => setIsSuccess(false), 5000); // 5 sec baad message hide
+      }
+    } catch (error) {
+  console.log("Full Error Object: ", error);
+  if (error.response) {
+    // Backend ne error bheja hai (e.g., 400 ya 500)
+    alert("Backend Error: " + error.response.data.message);
+  } else if (error.request) {
+    // Backend tak request hi nahi pahunchi (URL ya CORS issue)
+    alert("Network Error: Backend se baat nahi ho rahi. Check Console (F12)");
+  } else {
+    // Kuch aur error
+    alert("Error: " + error.message);
+  }
+
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -24,26 +54,66 @@ export default function ContactUs() {
         {/* Contact Form */}
         <div className="bg-white p-8 rounded-2xl shadow-md border h-fit">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
+          
+          {/* Success Alert */}
+          {isSuccess && (
+            <div className="bg-green-50 text-green-700 p-4 rounded-lg mb-6 flex items-center gap-2 border border-green-200 font-medium">
+              <FiCheck size={20} /> Message sent successfully! We will contact you soon.
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-              <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" placeholder="e.g. Ahmad Ali" />
+              <input 
+                type="text" 
+                name="name"
+                required 
+                value={form.name} 
+                onChange={handleChange} 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" 
+                placeholder="e.g. Hafiz junaid" 
+              />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-              <input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" placeholder="email@example.com" />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone / WhatsApp Number</label>
+              <input 
+                type="tel" 
+                name="phone"
+                required 
+                value={form.phone} 
+                onChange={handleChange} 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" 
+                placeholder="e.g. 0300-1234567" 
+              />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-              <textarea rows="5" required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none" placeholder="Write your message here..."></textarea>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+              <textarea 
+                rows="5" 
+                name="message"
+                required 
+                value={form.message} 
+                onChange={handleChange} 
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none" 
+                placeholder="Write your message here...">
+              </textarea>
             </div>
-            <button type="submit" className="w-full bg-blue-900 hover:bg-blue-800 text-white font-semibold py-3 rounded-lg transition shadow-md">
-              Send Message
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="w-full bg-blue-900 hover:bg-blue-800 disabled:bg-blue-400 text-white font-semibold py-3.5 rounded-lg transition shadow-md flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>Sending...</>
+              ) : (
+                <><FiSend /> Send Message</>
+              )}
             </button>
           </form>
         </div>
 
-        {/* Contact Info & Map Placeholder */}
+        {/* Contact Info */}
         <div className="space-y-8 h-fit">
           <div className="bg-white p-8 rounded-2xl shadow-md border space-y-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">Get in Touch</h2>
@@ -52,7 +122,7 @@ export default function ContactUs() {
               <div className="bg-blue-100 text-blue-600 p-3 rounded-full"><FiMapPin size={20} /></div>
               <div>
                 <h4 className="font-semibold text-gray-800">Our Address</h4>
-                <p className="text-gray-600 text-sm">123 Main Street, Block-C, Lahore, Pakistan</p>
+                <p className="text-gray-600 text-sm">5-E New Karachi, Karachi, Pakistan</p>
               </div>
             </div>
 
@@ -60,8 +130,8 @@ export default function ContactUs() {
               <div className="bg-green-100 text-green-600 p-3 rounded-full"><FiPhone size={20} /></div>
               <div>
                 <h4 className="font-semibold text-gray-800">Phone Numbers</h4>
-                <p className="text-gray-600 text-sm">+92 300 1234567 (Principal)</p>
-                <p className="text-gray-600 text-sm">+92 42 35678901 (Reception)</p>
+                <p className="text-gray-600 text-sm">+92 300 1234567</p>
+                <p className="text-gray-600 text-sm">+92 312 9876543</p>
               </div>
             </div>
 
@@ -69,7 +139,7 @@ export default function ContactUs() {
               <div className="bg-red-100 text-red-600 p-3 rounded-full"><FiMail size={20} /></div>
               <div>
                 <h4 className="font-semibold text-gray-800">Email Address</h4>
-                <p className="text-gray-600 text-sm">info@apwaschool.edu.pk</p>
+                <p className="text-gray-600 text-sm">gbpsapwa5e@gmail.com</p>
               </div>
             </div>
 

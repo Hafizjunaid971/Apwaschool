@@ -8,7 +8,7 @@ import StudentPage from './pages/StudentPage';
 import Dashboard from './pages/Dashboard';
 import AboutUs from './pages/AboutUs';
 import OurTeam from './pages/OurTeam'; // ✅ ContactUs ki jagah OurTeam aaya
-
+import ContactUs from './pages/ContactUs'; // ✅ ContactUs page import kiya
 const classes = ['KG1', 'KG2', 'Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5'];
 
 function Sidebar({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) {
@@ -117,6 +117,8 @@ function App() {
                 <Link to="/" className="hover:text-blue-200 transition hidden sm:block">Home</Link>
                 <Link to="/about" className="hover:text-blue-200 transition hidden sm:block">About</Link>
                 <Link to="/our-team" className="hover:text-blue-200 transition hidden sm:block">Our Team</Link>
+                <Link to="/contact" className="hover:text-blue-200 transition hidden sm:block">Contact</Link>
+
                 <Link to="/login" className="bg-blue-700 hover:bg-blue-600 px-4 py-1.5 rounded-md transition">Admin Login</Link>
               </div>
             )}
@@ -135,7 +137,8 @@ function App() {
               <Route path="/about" element={<AboutUs />} />
               {/* ✅ OUR TEAM ROUTE ADD KIYA */}
               <Route path="/our-team" element={<OurTeam />} />
-              
+              <Route path="/contact" element={<ContactUs />} />
+
               <Route path="/login" element={<Login setAuthorizedUser={setAuthorizedUser} />} />
               <Route path="/staff" element={<StaffManagement />} />
               <Route path="/students/:className" element={<StudentPage />} />
@@ -156,6 +159,7 @@ function App() {
                 <li><Link to="/" className="hover:text-white transition">Home</Link></li>
                 <li><Link to="/about" className="hover:text-white transition">About Us</Link></li>
                 <li><Link to="/our-team" className="hover:text-white transition">Our Team</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
                 <li><Link to="/login" className="hover:text-white transition">Staff Portal</Link></li>
               </ul>
             </div>
@@ -164,7 +168,7 @@ function App() {
               <ul className="space-y-2 text-sm">
                 <li>📍 123 School Street, City</li>
                 <li>📞 +92 300 1234567</li>
-                <li>✉️ info@apwaschool.edu.pk</li>
+                <li>✉️ gbpsapwa5e@gmail.com</li>
               </ul>
             </div>
           </div>
