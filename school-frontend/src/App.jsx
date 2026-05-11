@@ -92,20 +92,22 @@ function App() {
       <div className="min-h-screen bg-gray-100 font-sans flex flex-col overflow-x-hidden">
         
         {/* STICKY BLUE TOP NAVBAR */}
-        <div className="fixed top-0 left-0 w-full h-16 bg-blue-900 text-white z-50 shadow-lg flex justify-between items-center px-4 md:px-6">
-          <div className="flex items-center gap-4">
+        <div className="fixed top-0 left-0 w-full h-16 bg-blue-900 text-white z-[60] shadow-lg flex justify-between items-center px-3 md:px-6">
+
+          <div className="flex items-center gap-2 min-w-0 flex-1">
             {authorizedUser && (
               <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
                 {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
               </button>
             )}
-            <h1 className="text-xl md:text-2xl font-bold tracking-wide">🏫 APWA School System</h1>
+             {/* Mobile pe chota text, Desktop pe bada */}
+            <h1 className="text-sm sm:text-lg md:text-2xl font-bold tracking-wide truncate">🏫 APWA School</h1>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 flex-shrink-0">
             {authorizedUser ? (
               <div className="flex items-center gap-4 text-sm font-medium">
-                <span className="hidden md:block text-blue-200 border border-blue-700 px-3 py-1 rounded-full">👤 {authorizedUser.split('@')[0]}</span>
+                <span className="hidden md:block text-sm text-blue-200 border border-blue-700 px-3 py-1 rounded-full">👤 {authorizedUser.split('@')[0]}</span>
                   <button onClick={handleLogout} className="bg-red-600 hover:bg-red-500 px-4 py-1.5 rounded-md transition flex items-center gap-2">
                   <FiLogOut size={16} /> <span className="hidden md:inline">Logout</span>
                 </button>
@@ -113,11 +115,12 @@ function App() {
               </div>
             ) : (
               /* ✅ PUBLIC TOP NAV LINKS (LOGIN KE BINA BHI DIKHENGE) */
-              <div className="flex items-center gap-4 text-sm font-medium">
-                <Link to="/" className="hover:text-blue-200 transition hidden sm:block">Home</Link>
-                <Link to="/about" className="hover:text-blue-200 transition hidden sm:block">About</Link>
-                <Link to="/our-team" className="hover:text-blue-200 transition hidden sm:block">Our Team</Link>
-                <Link to="/contact" className="hover:text-blue-200 transition hidden sm:block">Contact</Link>
+              <div className="flex items-center gap-1 md:gap-6 text-xs md:text-sm font-medium">
+                <Link to="/" className="hover:text-blue-200 transition px-1">Home</Link>
+                <Link to="/about" className="hover:text-blue-200 transition px-1">About</Link>
+                <Link to="/our-team" className="hover:text-blue-200 transition px-1">Our Team</Link>
+                <Link to="/contact" className="hover:text-blue-200 transition px-1">Contact</Link>
+
 
                 <Link to="/login" className="bg-blue-700 hover:bg-blue-600 px-4 py-1.5 rounded-md transition">Admin Login</Link>
               </div>
