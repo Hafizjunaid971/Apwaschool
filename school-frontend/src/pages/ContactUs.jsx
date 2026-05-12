@@ -153,9 +153,18 @@ export default function ContactUs() {
           </div>
 
           {/* Map Placeholder */}
-          <div className="rounded-2xl overflow-hidden shadow-md border h-64 w-full bg-gray-200 flex items-center justify-center text-gray-500 font-medium">
-            📍 Google Map Embed Here
-          </div>
+                <div className="rounded-2xl overflow-hidden shadow-md border h-64 w-full">
+        <iframe
+          src="https://www.google.com/maps?q=24.8607,67.0011&z=15&output=embed"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Google Map"
+        ></iframe>
+      </div>
         </div>
 
       </div>
