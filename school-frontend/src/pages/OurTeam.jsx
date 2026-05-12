@@ -85,7 +85,7 @@ export default function OurTeam() {
         role: "Staff Cordinator", 
         phone: "0301-7788990", 
         email: "Idress@gmail.com", 
-        img: "/img/idress.jpeg",
+        img: "/img/idress1.jpeg",
         bio: "Mr. idress brings science to life through practical experiments and hands-on activities. He encourages students to ask questions and explore the world around them. His dedication to STEM education has inspired many students to participate in science fairs."
       },
       { 
