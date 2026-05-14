@@ -73,6 +73,22 @@ export default function OurTeam() {
         bio: "Ms. Fariha Naqwi is known for her immense patience and love for early childhood education. She oversees the KG and early primary classes, ensuring that the youngest students feel safe, loved, and excited to learn. She builds a strong foundation for their future academic journey."
       },
       { 
+        name: "Yasmeen Zehra", 
+        role: "Urdu Literature", 
+        phone: "0302-0000000", 
+        email: "yasmeenzehra@gmail.com", 
+        img: "/img/yasmeen.jpeg",
+        bio: "Ms. Yasmeen Zehra is known for her immense patience and love for early Urdu Literature education. She oversees the KG and early primary classes, ensuring that the youngest students feel safe, loved, and excited to learn. She builds a strong foundation for their future academic journey."
+      },
+      { 
+        name: "Laiqa tasleem", 
+        role: "Islamiat Literature", 
+        phone: "0302-0000000", 
+        email: "laiqatasleem@gmail.com", 
+        img: "/img/laiqa.jpeg",
+        bio: "Ms. Laiqa Tasleem is known for her immense patience and love for early Islamiat Literature education. She oversees the KG and early primary classes, ensuring that the youngest students feel safe, loved, and excited to learn. She builds a strong foundation for their future academic journey."
+      },
+      { 
         name: "Imranshaikh", 
         role: "Staff Cordinator", 
         phone: "0301-7788990", 
